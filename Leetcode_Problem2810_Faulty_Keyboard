@@ -1,0 +1,51 @@
+char * finalString(char * s){
+    int count_i = 0 , j = 0;
+    for( int i = 0 ; i < strlen(s) ; i++)
+        count_i = (s[i] == 'i') ? count_i + 1 : count_i ;
+    char* ans = (char*)malloc(sizeof(char)*((strlen(s) - count_i)+1));
+    for( int i = 0 ; i < strlen(s) ; i++)
+    {
+        if(s[i] == 'i')
+        {
+            int start = 0 , pos = j-1;
+            while(start < pos)
+            {
+                char temp = ans[start];
+                ans[start++] = ans[pos];
+                ans[pos--] = temp;
+            }
+        }
+        else
+            ans[j++] = s[i];
+    }
+    ans[j] = '\0';
+    return ans;
+}
+
+
+-------------------------------------------------------------------------------------------
+
+
+char * finalString(char * s){
+    for( int i = 0; i < strlen(s) ; i++)
+    {
+        if(s[i] == 'i')
+        {
+            int start = 0 , pos = i-1;
+            while(start < pos)
+            {
+                char temp = s[start];
+                s[start++] = s[pos];
+                s[pos--] = temp;
+            }
+            start = i;
+            while(start < strlen(s))
+            {
+                s[start] = s[start + 1];
+                start++;
+            }
+            i--;
+        }
+    }
+    return s;
+}
